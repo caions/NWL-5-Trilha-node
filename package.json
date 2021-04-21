@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev --transpile-only --ignore-watch node_modules src/server.ts",
-    "typeorm": "ts-node-dev node_modules/typeorm/cli.js"
+    "typeorm": "ts-node-dev node_modules/typeorm/cli.js",
+    "lint": "tsc --noEmit && eslint --ext .js,.ts, src/**"
   },
   "dependencies": {
     "@typescript-eslint/eslint-plugin": "^4.22.0",
@@ -23,8 +24,20 @@
     "eslint-config-prettier": "^8.2.0",
     "eslint-plugin-prettier": "^3.4.0",
     "git-commit-msg-linter": "^3.1.0",
+    "husky": "4.3.8",
+    "lint-staged": "^10.5.4",
     "prettier": "^2.2.1",
     "ts-node-dev": "^1.1.6",
     "typescript": "^4.2.4"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "yarn lint"
+    ]
   }
 }
